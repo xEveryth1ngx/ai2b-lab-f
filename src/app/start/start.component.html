@@ -1,0 +1,39 @@
+<main>
+  <div *ngIf="!isAuthenticated()" class="unauthorized">
+    <div>
+      You are not logged in. You should not see the <strong>Items</strong> tab nor the <strong>Users</strong> tab.
+    </div>
+    <form (submit)="loginSubmit()">
+      <div>
+        <label for="username">Username</label>
+        <input [(ngModel)]="username" type="text" id="username" name="username" />
+      </div>
+      <div>
+        <label for="password">Password</label>
+        <input [(ngModel)]="password" type="password" id="password" name="password" />
+      </div>
+      <div>
+        <input type="submit" value="Login" />
+      </div>
+      <div class="error-div" *ngIf="error.length">
+        <div class="error">{{error}}</div>
+      </div>
+    </form>
+  </div>
+
+
+  <div class="authorized" *ngIf="isAuthenticated() && !isAdmin()">
+    <p>
+      You are logged in. You should see the <strong>Items</strong> tab.
+      If you were an admin you would also see the <strong>Users</strong> tab.
+    </p>
+  </div>
+
+
+  <div class="admin" *ngIf="isAuthenticated() && isAdmin()">
+    <p>
+      You are logged in. You should see the <strong>Items</strong> tab.
+      And because you are an admin, you should also see the <strong>Users</strong> tab.
+    </p>
+  </div>
+</main>
